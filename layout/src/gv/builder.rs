@@ -270,9 +270,26 @@ impl GraphBuilder {
             }
         }
 
+        let eid: u64 = {
+            match lst.get("eid") {
+                Some(eid_str) => {
+                    match eid_str.parse::<u64>() {
+                        Ok(eid) => eid,
+                        Err(e) => {
+                            #[cfg(feature = "log")]
+                            log::info!("Can't parse eid integer \"{}\": {}", eid_str, e);
+                            0
+                        }
+                    }
+                }
+                None => 0
+            }
+
+        };
+
         let color = Color::fast(&color);
         let look = StyleAttr::new(color, line_width, None, 0, font_size);
-        Arrow::new(start, end, line_style, &label, &look, &from_port, &to_port)
+        Arrow::new(start, end, line_style, &label, &look, &from_port, &to_port, eid)
     }
 
     /// Convert the color to some color that we can handle.
@@ -362,6 +379,22 @@ impl GraphBuilder {
             }
         }
 
+        let eid: u64 = {
+            match lst.get("eid") {
+                Some(eid_str) => {
+                    match eid_str.parse::<u64>() {
+                        Ok(eid) => eid,
+                        Err(e) => {
+                            #[cfg(feature = "log")]
+                            log::info!("Can't parse eid integer \"{}\": {}", eid_str, e);
+                            0
+                        }
+                    }
+                }
+                None => 0,
+            }
+        };
+
         // We flip the orientation before we create the shape. In graphs that
         // grow top down the records grow to the left.
         let dir = dir.flip();
@@ -374,6 +407,6 @@ impl GraphBuilder {
             rounded_corder_value,
             font_size,
         );
-        Element::create(shape, look, dir, sz)
+        Element::create(shape, look, dir, sz, eid)
     }
 }

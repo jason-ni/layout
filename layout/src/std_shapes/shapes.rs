@@ -72,6 +72,7 @@ pub struct Element {
     pub pos: Position,
     pub look: StyleAttr,
     pub orientation: Orientation,
+    pub eid: u64,
 }
 
 impl Element {
@@ -80,6 +81,7 @@ impl Element {
         look: StyleAttr,
         orientation: Orientation,
         size: Point,
+        eid: u64,
     ) -> Element {
         Element {
             shape,
@@ -91,6 +93,7 @@ impl Element {
                 Point::zero(),
                 Point::splat(PADDING),
             ),
+            eid,
         }
     }
     pub fn create_connector(
@@ -108,6 +111,7 @@ impl Element {
                 Point::zero(),
                 Point::splat(CONN_PADDING),
             ),
+            eid: 0,
         }
     }
 
@@ -130,6 +134,7 @@ pub struct Arrow {
     pub look: StyleAttr,
     pub src_port: Option<String>,
     pub dst_port: Option<String>,
+    pub eid: u64,
 }
 
 impl Default for Arrow {
@@ -142,6 +147,7 @@ impl Default for Arrow {
             look: StyleAttr::simple(),
             src_port: Option::None,
             dst_port: Option::None,
+            eid: 0,
         }
     }
 }
@@ -156,6 +162,7 @@ impl Arrow {
             look: self.look.clone(),
             src_port: self.dst_port.clone(),
             dst_port: self.src_port.clone(),
+            eid: self.eid,
         }
     }
 
@@ -167,6 +174,7 @@ impl Arrow {
         look: &StyleAttr,
         src_port: &Option<String>,
         dst_port: &Option<String>,
+        eid: u64,
     ) -> Arrow {
         Arrow {
             start,
@@ -176,6 +184,7 @@ impl Arrow {
             look: look.clone(),
             src_port: src_port.clone(),
             dst_port: dst_port.clone(),
+            eid,
         }
     }
 
@@ -188,6 +197,7 @@ impl Arrow {
             &StyleAttr::simple(),
             &None,
             &None,
+            0,
         )
     }
 
@@ -200,6 +210,7 @@ impl Arrow {
             &StyleAttr::simple(),
             &None,
             &None,
+            0,
         )
     }
 }

@@ -50,7 +50,7 @@ fn test0(offset_x: f64, offset_y: f64, svg: &mut SVGWriter, shape_idx: usize) {
         };
 
         let look = StyleAttr::simple();
-        let mut es = Element::create(sp, look, Orientation::LeftToRight, sz);
+        let mut es = Element::create(sp, look, Orientation::LeftToRight, sz, 0);
         es.position_mut().move_to(loc);
         shapes.push(es);
     }
@@ -80,8 +80,8 @@ fn test1(offset_x: f64, offset_y: f64, svg: &mut SVGWriter) {
     look1.fill_color = Some(Color::fast("olive"));
     look1.line_color = Color::fast("brown");
 
-    let mut es0 = Element::create(sp0, look0, Orientation::LeftToRight, sz);
-    let mut es1 = Element::create(sp1, look1, Orientation::LeftToRight, sz);
+    let mut es0 = Element::create(sp0, look0, Orientation::LeftToRight, sz, 0);
+    let mut es1 = Element::create(sp1, look1, Orientation::LeftToRight, sz, 0);
 
     let loc0 = Point::new(offset_x, offset_y);
     let loc1 = Point::new(offset_x, offset_y + 150.);
@@ -115,8 +115,8 @@ fn test3(
     look1.fill_color = Some(Color::fast("olive"));
     look1.line_color = Color::fast("brown");
 
-    let mut es0 = Element::create(sp0, look0, Orientation::LeftToRight, sz);
-    let mut es1 = Element::create(sp1, look1, Orientation::LeftToRight, sz);
+    let mut es0 = Element::create(sp0, look0, Orientation::LeftToRight, sz, 0);
+    let mut es1 = Element::create(sp1, look1, Orientation::LeftToRight, sz, 0);
 
     let loc0 = Point::new(offset_x, offset_y);
     let loc1 = Point::new(offset_x + offset_x_other, offset_y + 150.);
@@ -151,8 +151,8 @@ fn test4(
     look1.fill_color = Some(Color::fast("lightblue"));
     look1.line_color = Color::fast("black");
 
-    let mut es0 = Element::create(sp0, look0, Orientation::LeftToRight, sz);
-    let mut es1 = Element::create(sp1, look1, Orientation::LeftToRight, sz);
+    let mut es0 = Element::create(sp0, look0, Orientation::LeftToRight, sz, 0);
+    let mut es1 = Element::create(sp1, look1, Orientation::LeftToRight, sz, 0);
 
     let loc0 = Point::new(offset_x, offset_y);
     let loc1 = Point::new(offset_x + offset_x_other, offset_y + 150.);
@@ -189,8 +189,8 @@ fn test5(
     look1.fill_color = Some(Color::fast("salmon"));
     look1.line_color = Color::fast("black");
 
-    let mut es0 = Element::create(sp0, look0, Orientation::LeftToRight, sz);
-    let mut es1 = Element::create(sp1, look1, Orientation::LeftToRight, sz);
+    let mut es0 = Element::create(sp0, look0, Orientation::LeftToRight, sz, 0);
+    let mut es1 = Element::create(sp1, look1, Orientation::LeftToRight, sz, 0);
     let mut inv = Element::empty_connector(Orientation::LeftToRight);
 
     let mut loc0 = Point::new(offset_x, offset_y);
@@ -229,8 +229,8 @@ fn test6(
 
     let rec0 = generate_record();
     let rec1 = generate_record();
-    let mut es0 = Element::create(rec0, look0, Orientation::LeftToRight, sz);
-    let mut es1 = Element::create(rec1, look1, Orientation::LeftToRight, sz);
+    let mut es0 = Element::create(rec0, look0, Orientation::LeftToRight, sz, 0);
+    let mut es1 = Element::create(rec1, look1, Orientation::LeftToRight, sz, 0);
     let mut inv = Element::empty_connector(Orientation::LeftToRight);
 
     let loc0 = Point::new(offset_x, offset_y);
@@ -255,6 +255,7 @@ fn test6(
         &look1,
         &Some("a".to_string()),
         &Some("c".to_string()),
+        0,
     );
     let vec: Vec<Element> = vec![es0.clone(), inv.clone(), es1.clone()];
     render::render_arrow(svg, LAYOUT_HELPER, &vec[..], &stl);
@@ -270,7 +271,7 @@ fn test7(offset_x: f64, offset_y: f64, svg: &mut SVGWriter) {
     red.line_color = Color::fast("red");
 
     let sz = Point::splat(100.);
-    let mut es0 = Element::create(sp, look1, Orientation::LeftToRight, sz);
+    let mut es0 = Element::create(sp, look1, Orientation::LeftToRight, sz, 0);
     let center = Point::new(offset_x, offset_y);
     es0.move_to(center);
     es0.render(false, svg);
@@ -321,7 +322,7 @@ fn test8(offset_x: f64, offset_y: f64, svg: &mut SVGWriter) {
     look1.fill_color = Some(Color::fast("steelblue"));
     look1.line_color = Color::fast("white");
 
-    let mut es0 = Element::create(rec0, look1, Orientation::LeftToRight, sz);
+    let mut es0 = Element::create(rec0, look1, Orientation::LeftToRight, sz, 0);
 
     let loc0 = Point::new(offset_x, offset_y);
     es0.move_to(loc0);

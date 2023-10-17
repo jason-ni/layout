@@ -81,8 +81,8 @@ fn simple_graph() {
     let look1 = StyleAttr::simple();
     let sz = Point::new(100., 100.);
     // Create the nodes:
-    let node0 = Element::create(sp0, look0, Orientation::LeftToRight, sz);
-    let node1 = Element::create(sp1, look1, Orientation::LeftToRight, sz);
+    let node0 = Element::create(sp0, look0, Orientation::LeftToRight, sz, 0);
+    let node1 = Element::create(sp1, look1, Orientation::LeftToRight, sz, 0);
 
     // Add the nodes to the graph, and save a handle to each node.
     let handle0 = vg.add_node(node0);
